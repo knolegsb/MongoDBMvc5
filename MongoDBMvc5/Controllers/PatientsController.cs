@@ -44,5 +44,16 @@ namespace MongoDBMvc5.Controllers
             }
             return Ok(patient);
         }
+
+        [Route("api/patients/{id}/medications")]
+        public IHttpActionResult GetMedications(string id)
+        {
+            var patient = _patients.FindOneById(ObjectId.Parse(id));
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return Ok(patient.Medications);
+        }
     }
 }
